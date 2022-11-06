@@ -101,7 +101,11 @@ function FeatureViewerLoaded({ data }) {
         );
     }, [data, viewerData]);
 
-    return <div className="use-bootstrap" id="fv1" />;
+    return (
+        <div>
+            <div className="use-bootstrap" id="fv1" />
+        </div>
+    );
 }
 function FeatureViewerLoading() {
     return (
