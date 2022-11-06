@@ -33,7 +33,7 @@ const queryClient = new QueryClient({
 });
 
 const instance = createInstance({
-    urlBase: "https://embed.predictprotein.org",
+    urlBase: `${process.env.REACT_APP_PUBLIC_URL}`,
     siteId: 4,
     trackerUrl: "https://predictprotein.org/piwik/piwik.php", // optional, default value: `${urlBase}matomo.php`
     disabled: false, // optional, false by default. Makes all tracking calls no-ops if set to true.
@@ -55,15 +55,14 @@ const instance = createInstance({
 if (!getCookieConsentValue("TrackingConsent")) {
     instance.pushInstruction("optUserOut");
 }
-
 root.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <MatomoProvider value={instance}>
-                <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
+                <BrowserRouter basename={`${process.env.REACT_APP_PUBLIC_URL}`}>
                     <Header />
                     <Routes>
-                        <Route path="/" element={<Input />} />
+                        <Route index path="/" element={<Input />} />
                         <Route path="/imprint" element={<Imprint />} />
                         <Route path="/cite" element={<Cite />} />
                         <Route path="/glossary" element={<Glossary />} />
@@ -92,12 +91,16 @@ root.render(
                             path="/o"
                             element={<Followup page={PAGES.overview} />}
                         />
+                        <Route
+                            component={() => (
+                                <>404 Did not find that resource.</>
+                            )}
+                        />
                     </Routes>
                     <Footer />
                     <Notifications />
                     {/*NOTE: Leave as last element so it is rendered above all.*/}
                 </BrowserRouter>
-
                 <CookieConsent
                     location="bottom"
                     buttonText="Sure!"
