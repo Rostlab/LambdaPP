@@ -60,7 +60,7 @@ root.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <MatomoProvider value={instance}>
-                <BrowserRouter>
+                <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
                     <Header />
                     <Routes>
                         <Route path="/" element={<Input />} />
