@@ -94,6 +94,7 @@ function StructureNavigation({ queryAFDB, data, pdb }) {
 function StructureDisplayLoaded({ data }) {
     const viewerRef = React.useRef(null);
     const [initialRender, setInitialRender] = React.useState(false);
+    const [readyForRender, setReadyForRender] = React.useState(false);
     const { source, ...customData } = data;
     const viewerInstance = React.useRef(null);
     const { start, end } = useSelection((state) => ({
@@ -103,26 +104,28 @@ function StructureDisplayLoaded({ data }) {
 
     React.useEffect(() => {
         if (!viewerRef.current) return;
-        if (!viewerInstance.current)
+        if (!viewerInstance.current) {
             viewerInstance.current = new window.PDBeMolstarPlugin();
-        else {
-            if (!initialRender) {
-                (async () => {
-                    await viewerInstance.current.render(viewerRef.current, {
-                        ...VIEWER_OPTIONS,
-                        customData,
-                    });
-                    setInitialRender(true);
-                })();
-            }
+            setReadyForRender(true);
         }
+
         // Clearing does not work somehow.
         // return () => {
         //     if (viewerInstance.current != null && initialRender)
         //         viewerInstance.current.clear();
         //     setInitialRender(false);
         // };
-    }, [initialRender, customData]);
+    }, []);
+
+    React.useEffect(() => {
+        if (readyForRender && !initialRender) {
+            viewerInstance.current.render(viewerRef.current, {
+                ...VIEWER_OPTIONS,
+                customData,
+            });
+            setInitialRender(true);
+        }
+    }, [readyForRender, initialRender, customData]);
 
     React.useEffect(() => {
         if (!initialRender) return;
