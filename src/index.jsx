@@ -32,29 +32,26 @@ const queryClient = new QueryClient({
     }),
 });
 
-// const instance = createInstance({
-//     urlBase: `${process.env.REACT_APP_PUBLIC_URL}`,
-//     siteId: 4,
-//     trackerUrl: "https://predictprotein.org/piwik/piwik.php", // optional, default value: `${urlBase}matomo.php`
-//     disabled: false, // optional, false by default. Makes all tracking calls no-ops if set to true.
-//     heartBeat: {
-//         // optional, enabled by default
-//         active: true, // optional, default value: true
-//         seconds: 15, // optional, default value: `15
-//     },
-//     linkTracking: true, // optional, default value: true
-//     configurations: {
-//         // optional, default value: {}
-//         // any valid matomo configuration, all below are optional
-//         disableCookies: false,
-//         setSecureCookie: true,
-//         setRequestMethod: "POST",
-//     },
-// });
-const instance = new (function mock() {
-    this.pushInstruction = (a) => {};
-    this.trackPageView = (a) => {};
-})();
+const instance = createInstance({
+    urlBase: process.env.PUBLIC_URL || "/",
+    siteId: 4,
+    trackerUrl: "https://predictprotein.org/piwik/piwik.php", // optional, default value: `${urlBase}matomo.php`
+    srcUrl: "https://predictprotein.org/piwik/piwik.js",
+    disabled: false, // optional, false by default. Makes all tracking calls no-ops if set to true.
+    heartBeat: {
+        // optional, enabled by default
+        active: true, // optional, default value: true
+        seconds: 15, // optional, default value: `15
+    },
+    linkTracking: true, // optional, default value: true
+    configurations: {
+        // optional, default value: {}
+        // any valid matomo configuration, all below are optional
+        disableCookies: false,
+        setSecureCookie: true,
+        setRequestMethod: "POST",
+    },
+});
 
 if (!getCookieConsentValue("TrackingConsent")) {
     instance.pushInstruction("optUserOut");
@@ -62,44 +59,39 @@ if (!getCookieConsentValue("TrackingConsent")) {
 
 root.render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <MatomoProvider value={instance}>
+        <MatomoProvider value={instance}>
+            <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
                     <Header />
                     <Routes>
                         <Route index element={<Input />} />
-                        <Route path="/imprint" element={<Imprint />} />
-                        <Route path="/cite" element={<Cite />} />
-                        <Route path="/glossary" element={<Glossary />} />
-                        <Route path="/legal" element={<Legal />} />
+                        <Route path="imprint" element={<Imprint />} />
+                        <Route path="cite" element={<Cite />} />
+                        <Route path="glossary" element={<Glossary />} />
+                        <Route path="legal" element={<Legal />} />
                         <Route
-                            path="/i/:sequence"
+                            path="i/:sequence"
                             element={<Followup page={PAGES.interactive} />}
                         />
                         <Route
-                            path="/i"
+                            path="i"
                             element={<Followup page={PAGES.interactive} />}
                         />
                         <Route
-                            path="/p/:sequence"
+                            path="p/:sequence"
                             element={<Followup page={PAGES.print} />}
                         />
                         <Route
-                            path="/p"
+                            path="p"
                             element={<Followup page={PAGES.print} />}
                         />
                         <Route
-                            path="/o/:sequence"
+                            path="o/:sequence"
                             element={<Followup page={PAGES.overview} />}
                         />
                         <Route
-                            path="/o"
+                            path="o"
                             element={<Followup page={PAGES.overview} />}
-                        />
-                        <Route
-                            component={() => (
-                                <>404 Did not find that resource.</>
-                            )}
                         />
                     </Routes>
                     <Footer />
@@ -128,7 +120,7 @@ root.render(
                         </a>
                     </span>
                 </CookieConsent>
-            </MatomoProvider>
-        </QueryClientProvider>
+            </QueryClientProvider>
+        </MatomoProvider>
     </React.StrictMode>
 );
