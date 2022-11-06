@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+<details>
+  <summary markdown="span"> <u><b>Table of Contents</u></b> </summary>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[[_TOC_]]
 
-## Available Scripts
+</details>
 
-In the project directory, you can run:
+# LambdaPP -- Fast and accessible protein-specific phenotype predictions
 
-### `yarn start`
+We introduce LambdaPP, a webserver integrating fast and accurate sequence-only protein feature predictions based on embeddings from protein Language Models (pLMs) in seconds with high-quality protein structure predictions. The intuitive interface invites experts and novices to benefit from the latest machine learning tools. LambdaPP’s unique combination of predicted features may help in formulating hypotheses for experiments and as input to bioinformatics pipelines.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can find the specifics of LambdaPP in our Paper: [_LambdaPP -- Fast and accessible protein-specific phenotype predictions_(Olenyi et al., 2022)](https://doi.org/10.1101/2022.08.04.502750). The webservice is accessible [here](https://embed.predictprotein.org)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## General Idea
 
-### `yarn test`
+<div align="center" style='background-color: white'><img src="src/assets/PredDiagram.png" width="75%" height="75%"/></div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+LambdaPP uses fast sequnece only feature predictions and accurate structure predictions to offer a unified, reactive interface which enables exploration and hypothesis building.
+Under the hood LambdaPP uses React for the frontend and relies on the API of UniprotKB, AlphafoldDB, and bioembeddings to facilitate predictions.
 
-### `yarn build`
+An overview over the orchestration is shown in the figure above.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Involved
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We're happy to accept pull requests and try to adress issues as quickly as we can. Feel free to engage!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you want to contribute to LambdaPP, feel free to fork, clone, and execute:
 
-### `yarn eject`
+```
+npm install
+react-scripts start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This will create your own local version of the LambdaPP.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Please be advised that while the front-end will run locally, per-default all API calls will still be directed to external services, this includes [UniprotKB](https://www.uniprot.org/help/api), [AlphafoldDB](https://alphafold.ebi.ac.uk/), [FoldSeek](https://search.foldseek.com/search) and the [bioembeddings API](https://github.com/sacdallago/bio_embeddingsfolds). If you want to disable that behavior, feel free to adjust the request hooks in the `src/hooks` directory.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you want to deploy your own version of the backend, feel free to check out the [bio_embeddings](https://github.com/sacdallago/bio_embeddings) repository for detailled instructions or [chat us up](https://chat.bioembeddings.com/home). When you work on or use LambdaPP, please acknowledge [Rostlab's Core Values](https://rostlab.org/core_values) and our [Code of Conduct](./CODE_OF_CONDUCT.md) in word and spirit.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## External Services
 
-## Learn More
+In odrder to provide as high-quality features as possible LambdaPP relies on external services.
+We're immensely greatful that the providers of these services have made them accessible and maintain them. If you use LambdaPP for your work please feel free to credit these services as well.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   [UniprotKB](https://www.uniprot.org/help/api)
+-   [AlphafoldDB](https://alphafold.ebi.ac.uk/)
+-   [FoldSeek](https://search.foldseek.com/search)
+-   [ColabFold](https://github.com/sokrypton/ColabFold)
+-   [bioembeddings API](https://github.com/sacdallago/bio_embeddingsfolds)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How To Cite
 
-### Code Splitting
+While our article is still under review, please cite the pre-print on biorxiv.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<pre>
+LambdaPP: Fast and accessible protein-specific phenotype predictions
+Tobias Olenyi, Céline Marquet, Michael Heinzinger, Benjamin Kröger, Tiha Nikolova, Michael Bernhofer, Philip Sändig, Konstantin Schütze, Maria Littmann, Milot Mirdita, Martin Steinegger, Christian Dallago, Burkhard Rost
+bioRxiv 2022.08.04.502750; doi: [https://doi.org/10.1101/2022.08.04.502750](https://doi.org/10.1101/2022.08.04.502750])
+</pre>
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+@article {Olenyi2022.08.04.502750,
+	author = {Olenyi, Tobias and Marquet, C{\'e}line and Heinzinger, Michael and Kr{\"o}ger, Benjamin and Nikolova, Tiha and Bernhofer, Michael and S{\"a}ndig, Philip and Sch{\"u}tze, Konstantin and Littmann, Maria and Mirdita, Milot and Steinegger, Martin and Dallago, Christian and Rost, Burkhard},
+	title = {LambdaPP: Fast and accessible protein-specific phenotype predictions},
+	elocation-id = {2022.08.04.502750},
+	year = {2022},
+	doi = {10.1101/2022.08.04.502750},
+	publisher = {Cold Spring Harbor Laboratory},
+	transmembrane proteinTPUtensor processing unit},
+	URL = {https://www.biorxiv.org/content/early/2022/08/05/2022.08.04.502750},
+	eprint = {https://www.biorxiv.org/content/early/2022/08/05/2022.08.04.502750.full.pdf},
+	journal = {bioRxiv}
+}
+```

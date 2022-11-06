@@ -1,38 +1,126 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import Interactive from "./Interactive";
-import "./styles/index.css";
-import * as serviceWorker from "./utils/serviceWorker";
-import { Provider } from "react-redux";
-import { store } from "./stores/index";
-import ReactGA from "react-ga";
+import { createRoot } from "react-dom/client";
+
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { MatomoProvider, createInstance } from "@jonkoops/matomo-tracker-react";
+import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes, HashRouter } from "react-router-dom";
-import { PrintPage } from "./components";
-import { createBrowserHistory } from "history";
 
-// FIXME transition to React18 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
-ReactGA.initialize(process.env.REACT_GA || "UA-137257046-2");
-const history = createBrowserHistory();
+import "./styles/index.css";
+import "./styles/App.css";
 
-ReactDOM.render(
-  <Provider store={store}>
+import Imprint from "./pages/imprint";
+import Footer from "./components/Footer";
+import Cite from "./pages/Cite";
+import Input from "./pages/Input";
+import Glossary from "./pages/Glossary";
+import Notifications from "./components/Notifications";
+import Header from "./components/Header";
+import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
+import { Followup } from "./pages/Followup";
+import { handleQueryError } from "./lib/error";
+import { PAGES } from "./lib/pages";
+import { Legal } from "./pages/Legal";
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+const queryClient = new QueryClient({
+    queryCache: new QueryCache({
+        onError: (error, query) => handleQueryError(error, query),
+    }),
+});
+
+const instance = createInstance({
+    urlBase: "https://embed.predictprotein.org",
+    siteId: 4,
+    trackerUrl: "https://predictprotein.org/piwik/piwik.php", // optional, default value: `${urlBase}matomo.php`
+    disabled: false, // optional, false by default. Makes all tracking calls no-ops if set to true.
+    heartBeat: {
+        // optional, enabled by default
+        active: true, // optional, default value: true
+        seconds: 15, // optional, default value: `15
+    },
+    linkTracking: true, // optional, default value: true
+    configurations: {
+        // optional, default value: {}
+        // any valid matomo configuration, all below are optional
+        disableCookies: false,
+        setSecureCookie: true,
+        setRequestMethod: "POST",
+    },
+});
+
+if (!getCookieConsentValue("TrackingConsent")) {
+    instance.pushInstruction("optUserOut");
+}
+
+root.render(
     <React.StrictMode>
-      <HashRouter history={history}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/interactive/:sequence" element={<Interactive />} />
-          <Route path="/printpage/:sequence" element={<PrintPage />} />
-          <Route path="/:sequence" element={<App />} />
-        </Routes>
-      </HashRouter>
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
-);
+        <QueryClientProvider client={queryClient}>
+            <MatomoProvider value={instance}>
+                <BrowserRouter>
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Input />} />
+                        <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/cite" element={<Cite />} />
+                        <Route path="/glossary" element={<Glossary />} />
+                        <Route path="/legal" element={<Legal />} />
+                        <Route
+                            path="/i/:sequence"
+                            element={<Followup page={PAGES.interactive} />}
+                        />
+                        <Route
+                            path="/i"
+                            element={<Followup page={PAGES.interactive} />}
+                        />
+                        <Route
+                            path="/p/:sequence"
+                            element={<Followup page={PAGES.print} />}
+                        />
+                        <Route
+                            path="/p"
+                            element={<Followup page={PAGES.print} />}
+                        />
+                        <Route
+                            path="/o/:sequence"
+                            element={<Followup page={PAGES.overview} />}
+                        />
+                        <Route
+                            path="/o"
+                            element={<Followup page={PAGES.overview} />}
+                        />
+                    </Routes>
+                    <Footer />
+                    <Notifications />
+                    {/*NOTE: Leave as last element so it is rendered above all.*/}
+                </BrowserRouter>
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+                <CookieConsent
+                    location="bottom"
+                    buttonText="Sure!"
+                    declineButtonText="Nah :|"
+                    flipButtons={true}
+                    acceptOnOverlayClick={true}
+                    onAccept={() =>
+                        instance.pushInstruction("forgetUserOptOut")
+                    }
+                    enableDeclineButton
+                    cookieName="TrackingConsent"
+                    style={{ background: "#2B373B", with: "100%" }}
+                    expires={150}
+                >
+                    This website tracks how you use our service in order to
+                    improve it. Is that fine?
+                    <span className="ms-2" style={{ fontSize: "10px" }}>
+                        <a href="/legal" target="_blank" className="link-light">
+                            Read the details
+                        </a>
+                    </span>
+                </CookieConsent>
+            </MatomoProvider>
+        </QueryClientProvider>
+    </React.StrictMode>
+);
