@@ -92,8 +92,6 @@ root.render(
                             path="/o"
                             element={<Followup page={PAGES.overview} />}
                         />
-                        <Route path="" element={<Input />} />
-                        <Route element={<Input />} />
                     </Routes>
                     <Footer />
                     <Notifications />
