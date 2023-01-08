@@ -9,7 +9,7 @@
 
 We introduce LambdaPP, a webserver integrating fast and accurate sequence-only protein feature predictions based on embeddings from protein Language Models (pLMs) in seconds with high-quality protein structure predictions. The intuitive interface invites experts and novices to benefit from the latest machine learning tools. LambdaPP’s unique combination of predicted features may help in formulating hypotheses for experiments and as input to bioinformatics pipelines.
 
-You can find the specifics of LambdaPP in our Paper: [_LambdaPP -- Fast and accessible protein-specific phenotype predictions_(Olenyi et al., 2022)](https://doi.org/10.1101/2022.08.04.502750). The webservice is accessible [here](https://embed.predictprotein.org)
+You can find the specifics of LambdaPP in our Paper: [_LambdaPP -- Fast and accessible protein-specific phenotype predictions_(Olenyi et al., 2022)](https://doi.org/10.1002/pro.4524). The webservice is accessible [here](https://embed.predictprotein.org)
 
 ## General Idea
 
@@ -55,20 +55,18 @@ While our article is still under review, please cite the pre-print on biorxiv.
 <pre>
 LambdaPP: Fast and accessible protein-specific phenotype predictions
 Tobias Olenyi, Céline Marquet, Michael Heinzinger, Benjamin Kröger, Tiha Nikolova, Michael Bernhofer, Philip Sändig, Konstantin Schütze, Maria Littmann, Milot Mirdita, Martin Steinegger, Christian Dallago, Burkhard Rost
-bioRxiv 2022.08.04.502750; doi: [https://doi.org/10.1101/2022.08.04.502750](https://doi.org/10.1101/2022.08.04.502750])
+Protein Science. 2023; 32( 1):e4524; doi: [https://doi.org/10.1002/pro.4524](https://doi.org/10.1002/pro.4524])
 </pre>
 
 ```
-@article {Olenyi2022.08.04.502750,
+@article{https://doi.org/10.1002/pro.4524,
 	author = {Olenyi, Tobias and Marquet, C{\'e}line and Heinzinger, Michael and Kr{\"o}ger, Benjamin and Nikolova, Tiha and Bernhofer, Michael and S{\"a}ndig, Philip and Sch{\"u}tze, Konstantin and Littmann, Maria and Mirdita, Milot and Steinegger, Martin and Dallago, Christian and Rost, Burkhard},
+	journal = {Protein Science},
+	number = {1},
+	pages = {e4524},
 	title = {LambdaPP: Fast and accessible protein-specific phenotype predictions},
-	elocation-id = {2022.08.04.502750},
-	year = {2022},
-	doi = {10.1101/2022.08.04.502750},
-	publisher = {Cold Spring Harbor Laboratory},
-	transmembrane proteinTPUtensor processing unit},
-	URL = {https://www.biorxiv.org/content/early/2022/08/05/2022.08.04.502750},
-	eprint = {https://www.biorxiv.org/content/early/2022/08/05/2022.08.04.502750.full.pdf},
-	journal = {bioRxiv}
+	volume = {32},
+	year = {2023}}
+
 }
 ```

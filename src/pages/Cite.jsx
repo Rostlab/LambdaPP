@@ -27,9 +27,7 @@ export default function Cite() {
                                 cite us using:
                             </p>
                         </div>
-                        <Bibliography
-                            citations={["10.1101/2022.08.04.502750 "]}
-                        />
+                        <Bibliography citations={["10.1002/pro.4524"]} />
                     </Stack>
                 </Col>
             </Row>

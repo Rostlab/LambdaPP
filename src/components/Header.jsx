@@ -43,7 +43,7 @@ export default function Header() {
                 <ServiceStatus />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="https://www.biorxiv.org/content/10.1101/2022.08.04.502750v1">
+                        <Nav.Link href="https://onlinelibrary.wiley.com/doi/10.1002/pro.4524">
                             Publication
                         </Nav.Link>
                         <Nav.Link href="https://github.com/sacdallago/embed.predictprotein.org">
