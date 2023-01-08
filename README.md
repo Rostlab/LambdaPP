@@ -52,11 +52,11 @@ We're immensely greatful that the providers of these services have made them acc
 
 While our article is still under review, please cite the pre-print on biorxiv.
 
-<pre>
-LambdaPP: Fast and accessible protein-specific phenotype predictions
-Tobias Olenyi, Céline Marquet, Michael Heinzinger, Benjamin Kröger, Tiha Nikolova, Michael Bernhofer, Philip Sändig, Konstantin Schütze, Maria Littmann, Milot Mirdita, Martin Steinegger, Christian Dallago, Burkhard Rost
-Protein Science. 2023; 32( 1):e4524; doi: [https://doi.org/10.1002/pro.4524](https://doi.org/10.1002/pro.4524])
-</pre>
+> **LambdaPP: Fast and accessible protein-specific phenotype predictions**
+>
+> Tobias Olenyi, Céline Marquet, Michael Heinzinger, Benjamin Kröger, Tiha Nikolova, Michael Bernhofer, Philip Sändig, Konstantin Schütze, Maria Littmann, Milot Mirdita, Martin Steinegger, Christian Dallago, Burkhard Rost
+>
+> _Protein Science. 2023; 32(1): e4524; doi: [https://doi.org/10.1002/pro.4524](https://doi.org/10.1002/pro.4524])_
 
 ```
 @article{https://doi.org/10.1002/pro.4524,
