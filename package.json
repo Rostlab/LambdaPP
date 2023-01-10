@@ -1,7 +1,7 @@
 {
   "name": "LambdaPP",
   "version": "0.1.1",
-  "homepage": "https://embed.predictprotein.org",
+  "homepage": "https://rostlab.github.io/LambdaPP/",
   "private": true,
   "dependencies": {
     "@jonkoops/matomo-tracker-react": "^0.7.0",
