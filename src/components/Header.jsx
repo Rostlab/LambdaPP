@@ -46,7 +46,7 @@ export default function Header() {
                         <Nav.Link href="https://onlinelibrary.wiley.com/doi/10.1002/pro.4524">
                             Publication
                         </Nav.Link>
-                        <Nav.Link href="https://github.com/sacdallago/embed.predictprotein.org">
+                        <Nav.Link href="https://github.com/Rostlab/LambdaPP">
                             Code
                         </Nav.Link>
                     </Nav>

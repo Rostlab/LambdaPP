@@ -38,7 +38,7 @@ const Footer = () => (
                         </li>
                         <li>
                             <a
-                                href="https://github.com/sacdallago/embed.predictprotein.org"
+                                href="https://github.com/Rostlab/LambdaPP"
                                 className="link-dark"
                             >
                                 Contribute

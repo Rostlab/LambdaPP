@@ -72,7 +72,7 @@ export const Imprint = () => {
                                 LambdaPP was implemented by the Rostlab using
                                 React. Technical details, assistance and open
                                 issues can be found on{" "}
-                                <a href="https://github.com/sacdallago/embed.predictprotein.org">
+                                <a href="https://github.com/Rostlab/LambdaPP">
                                     GitHub
                                 </a>
                                 .
