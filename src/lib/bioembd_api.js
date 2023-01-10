@@ -8,7 +8,16 @@ export async function get_worker_status(worker_name) {
     const status_endpoint = ENDPOINT + "status/";
     const response = await fetchWithTimeout(status_endpoint + worker_name);
     if (!response.ok) {
-        throw new APIException(response.statusText, response.status);
+        throw new APIException(response.statusText, response.status, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrer: "no-referrer",
+        });
     }
     return response.json();
 }
