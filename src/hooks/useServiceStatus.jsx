@@ -8,7 +8,7 @@ export default function useServiceStatus() {
     const workers = [
         "prott5",
         "prott5_annotations",
-        "colabfold",
+        // "colabfold",
         "prott5_residue_landscape_annotations",
     ];
 
@@ -31,7 +31,7 @@ export default function useServiceStatus() {
     const names = [
         "Embedding Service",
         "Residue Annotation Service",
-        "Structure Service",
+        // "Structure Service",
         "Sequence Annotation Service",
         "Uniprot Sequence Service",
     ];
